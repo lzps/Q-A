@@ -17,8 +17,8 @@ with open(f[int(input('\n 请选择: ')) - 1], 'rb') as f:
 headers = csv.pop(0).split('|')
 for i, j in enumerate(headers):
     print(str(i) + ' -- ' + j + '（例如：' + csv[0].split('|')[i] + '）')
-Q = input('请选择提供什么信息（即已知、输出）' + '\n  可多选，以"|"分隔 : ').split('|')
-A = input('请接着选择求什么（即输入）' + '\n  可多选，以"|"分隔 : ').split('|')
+Q = exec(input('请选择提供什么信息（即已知、输出）' + '\n  可多选，以","分隔 : '))
+A = exec(input('请接着选择求什么（即输入）' + '\n  可多选，以"|"分隔 : '))
 
 print('\n1.做选择题' + '\n2.做填空题')
 t = input(' 请选择: ') # 如果不选2来做填空题，就是选1
@@ -33,10 +33,8 @@ while True:
         doing = f.split('|')
         question, known, rightA = [], [], []
         for i in Q:
-            i = int(i)
             known.append(headers[i] + '：' + doing[i])
         for i in A:
-            i = int(i)
             question.append(headers[i])
             rightA.append(str(doing[i]))
         print('已知：\n' + '  ' + '，'.join(known) + '\n则 ' + '或'.join(question) + '为：')
@@ -51,7 +49,7 @@ while True:
                 if i > out:
                     break
                 for k, l in enumerate(j.split('|')):
-                    if str(k) in A:
+                    if k in A:
                         answer.append(l)
             for i, j in enumerate(answer):
                 print(str(i) + ' --> ' + str(j))
